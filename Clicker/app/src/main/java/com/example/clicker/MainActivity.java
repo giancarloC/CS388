@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     int clicks = 0;
     int time = 10;
     ScheduledExecutorService service;
+
     ScheduledFuture timer = null;
 
     @Override
