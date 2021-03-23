@@ -155,15 +155,19 @@ public class MainActivity extends AppCompatActivity {
             doneToggle = (CheckBox) v.findViewById(R.id.doneToggle);
             isDone = doneToggle.isChecked();
 
+            long id = listView.getItemIdAtPosition(i);
+
+
             ContentValues values = new ContentValues();
             values.put(TodoProvider.DONE, isDone ? "1":"0");
 
-            Uri _uri = ContentUris.withAppendedId(TodoProvider.CONTENT_URI, i+1);
+            Uri _uri = ContentUris.withAppendedId(TodoProvider.CONTENT_URI, id);
             int returnCount = getContentResolver().update(
-                    _uri, values, TodoProvider._ID, new String[]{Long.toString(i+1)});
+                    _uri, values, TodoProvider._ID, new String[]{Long.toString(id)});
         }
 
         activeTodo = -1;
+        filtered = false;
         getTodos();
     }
 
@@ -195,8 +199,8 @@ public class MainActivity extends AppCompatActivity {
         String selArg = "";
 
         if (filtered == true){
-            selectionClause = TodoProvider.DONE + " = ?";
-            selArg = "0";
+            selectionClause = TodoProvider.DONE + " = 0";
+            selArg = "";
         }
         String[] selectionArgs = {selArg};
 
@@ -207,7 +211,13 @@ public class MainActivity extends AppCompatActivity {
                 selectionArgs,                                                              // Either empty, or the string the user entered
                 null);                                                            // The sort order for the returned rows
 
+        if (mCursor.getCount() == 0){
+            Log.i(TAG, "big oof");
+        }
 
+        if (mCursor == null){
+            Log.i(TAG, "Big error on my part");
+        }
         if (listView.getAdapter() == null) {
             cursorAdapter = new SimpleCursorAdapter(
                     getApplicationContext(),                                                    // The application's Context object
@@ -230,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 activeTodo = todoId;
                 changeState();
             });
+
 
         } else {
             //update the listview
