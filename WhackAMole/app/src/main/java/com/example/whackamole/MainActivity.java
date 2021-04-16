@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     final String TAG = "WhackAMole";
     final int MARGIN = 5;
 
-    ExecutorService executor = Executors.newFixedThreadPool(1000);
+    ExecutorService executor = Executors.newScheduledThreadPool(1000);
 
     private ScoreViewModel scoreViewModel;
 
