@@ -73,23 +73,26 @@
                 android:layout_gravity="center"
                 android:onClick="onClickStartGame"
                 android:text="Start" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="onClickStartGame"
+                android:onClick="onClickScores"
                 android:text="Scores" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="onClickStartGame"
+                android:onClick="onClickHistory"
                 android:text="History" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="onClickStartGame"
+                android:onClick="onClickSettings"
                 android:text="Settings" />
             <Button
                 android:layout_width="wrap_content"

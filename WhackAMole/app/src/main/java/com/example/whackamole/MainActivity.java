@@ -132,12 +132,25 @@ public class MainActivity extends AppCompatActivity {
         buildGrid();
         resetButtons();
         updateUI();
+/*
+        saveScore("first", 1);
+        saveScore("second", 1);
+        saveScore("third", 1);
+        saveScore("fourth", 1);
+        saveScore("fifth", 1);
+        saveScore("sixth", 1);
+        saveScore("seventh", 1);
+        saveScore("eight", 1);
+        saveScore("ninth", 1);
+        saveScore("tenth", 1);
+        saveScore("eleventh", 1);
+*/
 
         for (int i = 0; i < totalButtons; i++){
             sync.add(1); //adds true
         }
 
-        cTimer = new CountDownTimer(60000, 1000) {
+        cTimer = new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time = millisUntilFinished/1000;
                 timeText.setText("Time left: " + time);
@@ -243,9 +256,27 @@ public class MainActivity extends AppCompatActivity {
 
         alert.show();
     }
+
+    //all the buttons
     public void onClickStartGame(View view){
         startGame();
     }
+    public void onClickScores(View view){
+        Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onClickHistory(View view){
+        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onClickSettings(View view){
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     void newGame() {
         cTimer.cancel();
         score = 0;

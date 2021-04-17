@@ -18,6 +18,9 @@ public interface ScoreDao {
     @Query("SELECT * FROM scores order by score desc, created desc LIMIT 10")
     LiveData<List<ScoreEntity>> getTop10();
 
+    @Query("SELECT * FROM scores order by score desc, created desc")
+    LiveData<List<ScoreEntity>> getTop();
+
     @Query("SELECT * FROM scores WHERE name LIKE :name LIMIT 10")
     ScoreEntity findByName(String name);
 
@@ -29,4 +32,7 @@ public interface ScoreDao {
 
     @Query("DELETE FROM scores")
     void deleteAll();
+
+    @Query("DELETE FROM scores WHERE name LIKE :name AND score LIKE :score AND created LIKE :created")
+    void deleteScore(String name, int score, String created);
 }

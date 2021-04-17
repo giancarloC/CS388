@@ -1,5 +1,6 @@
 package com.example.whackamole;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,13 @@ public class ScoreViewHolder extends RecyclerView.ViewHolder {
 
     private ScoreViewHolder(View itemView) {
         super(itemView);
+
         nameView = itemView.findViewById(R.id.nameView);
         scoreView = itemView.findViewById(R.id.scoreView);
         dateView = itemView.findViewById(R.id.dateView);
     }
+
+
 
     public void bind(String name, int score, String date) {
         Log.v(TAG, "name " + name);

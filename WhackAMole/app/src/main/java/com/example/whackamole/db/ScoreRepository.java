@@ -14,6 +14,8 @@ public class ScoreRepository {
 
     private ScoreDao scoreDao;
     private LiveData<List<ScoreEntity>> top10;
+    private LiveData<List<ScoreEntity>> top;
+
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -23,12 +25,25 @@ public class ScoreRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         scoreDao = db.scoreDao();
         top10 = scoreDao.getTop10();
+        top = scoreDao.getTop();
     }
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<ScoreEntity>> getTop10() {
         return top10;
+    }
+
+    public LiveData<List<ScoreEntity>> getTop() {
+        return top;
+    }
+
+    public void deleteAll(){
+        scoreDao.deleteAll();
+    }
+
+    public void deleteScore(String name, int score, String created){
+        scoreDao.deleteScore(name, score, created);
     }
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
