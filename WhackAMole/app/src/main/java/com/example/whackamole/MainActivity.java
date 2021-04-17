@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             sync.add(1); //adds true
         }
 
-        cTimer = new CountDownTimer(5000, 1000) {
+        cTimer = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time = millisUntilFinished/1000;
                 timeText.setText("Time left: " + time);
