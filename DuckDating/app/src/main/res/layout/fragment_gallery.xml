@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.GalleryFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Someone: First Last"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_weight="0"
+        />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Location"
+        android:textSize="30dp"
+        android:layout_weight="0"
+        android:layout_below="@id/name"/>
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Gender"
+        android:textSize="20dp"
+        android:layout_weight="0"
+        android:layout_below="@id/location"/>
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_weight="0"
+        android:layout_below="@id/gender"
+        />
+
+    <TextView
+        android:id="@+id/bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="your bio"
+        android:textSize="20dp"
+        android:layout_weight="0"
+        android:layout_marginBottom="20dp"
+
+        android:layout_above="@id/linLayout"/>
+
+    <RelativeLayout
+        android:id="@+id/linLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center|bottom">
+
+        <Button
+            android:id="@+id/goLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt;"
+            android:layout_alignParentLeft="true"
+            />
+        <Button
+            android:id="@+id/match"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="Match"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/teal_200"
+            />
+        <Button
+            android:id="@+id/goRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/email"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+    <TextView
+        android:id="@+id/otherEmail"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+</RelativeLayout>
+
