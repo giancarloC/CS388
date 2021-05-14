@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
                         public void done(List<ParseObject> objects, ParseException e) {
                             if (e == null){
                                 Log.v("findInBackground", "size is :" + objects.size());
-                                
+
                                 ParseObject object = objects.get(0); //should be only 1 object in list
                                 location.setText(object.get("location").toString());
                                 gender.setText(object.get("gender").toString());
