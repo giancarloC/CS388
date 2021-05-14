@@ -256,6 +256,15 @@ public class LoginDataSource {
                     try {
                         int status = response.getInt("status");
                         if(status == 200) {
+
+                            Log.v("register", "email is " + email);
+
+                            user = new LoggedInUser(
+                                    response.getJSONObject("data").getString("uid"), response.getJSONObject("data").getString("displayName"), response.getJSONObject("data").getString("email"));
+                            success.accept(new Result.Success<>(user));
+
+                            Log.v("register", "success with the api!");
+
                             //create parse entity and places info in it
                             ParseObject entity = new ParseObject("Duck");
                             entity.put("firstName", username);
@@ -285,9 +294,6 @@ public class LoginDataSource {
                                 }
                             });
 
-                            user = new LoggedInUser(
-                                    response.getJSONObject("data").getString("uid"), response.getJSONObject("data").getString("displayName"));
-                            success.accept(new Result.Success<>(user));
                         }
                         else{
                             JSONObject respError = response.getJSONObject("error");

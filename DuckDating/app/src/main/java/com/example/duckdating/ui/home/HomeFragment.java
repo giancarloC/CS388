@@ -87,17 +87,19 @@ public class HomeFragment extends Fragment {
                 homeViewModel.getEmail().observe(owner, s -> {
                     email.setText(s);
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Duck");
-                    query.whereEqualTo("email", email.getText().toString());
+                    query.whereEqualTo("email", s);
+                    Log.v("getEmail", "email is : " + s);
                     query.findInBackground(new FindCallback<ParseObject>() {
                         @Override
                         public void done(List<ParseObject> objects, ParseException e) {
                             if (e == null){
+                                Log.v("findInBackground", "size is :" + objects.size());
+                                
                                 ParseObject object = objects.get(0); //should be only 1 object in list
                                 location.setText(object.get("location").toString());
                                 gender.setText(object.get("gender").toString());
                                 bio.setText(object.get("bio").toString());
-                                String firstName = name.getText().toString();
-                                name.setText("You: " + firstName + " " + object.get("lastName").toString());
+                                name.setText("You: " + object.get("firstName").toString() + " " + object.get("lastName").toString());
 
                                 //sets up image
                                 ParseFile imageFile = (ParseFile) object.get("pic");

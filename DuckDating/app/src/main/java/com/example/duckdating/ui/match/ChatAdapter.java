@@ -106,7 +106,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
             //sets image
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Duck");
-            query.whereEqualTo("email", message.getMatchEmail());
+            query.whereEqualTo("email", message.getEmail());
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
