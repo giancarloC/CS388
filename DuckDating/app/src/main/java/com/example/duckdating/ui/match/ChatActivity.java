@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duckdating.R;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -35,14 +36,16 @@ public class ChatActivity extends AppCompatActivity {
     EditText etMessage;
     ImageButton btSend;
 
+    String email, matchEmail;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
         //get user duck information from intent
-        String email = getIntent().getStringExtra("email");
-        String matchEmail = getIntent().getStringExtra("matchEmail");
+        email = getIntent().getStringExtra("email");
+        matchEmail = getIntent().getStringExtra("matchEmail");
 
         //setup views
         etMessage = findViewById(R.id.etMessage);
@@ -89,18 +92,30 @@ public class ChatActivity extends AppCompatActivity {
 
     //queries messages from parse
     void refreshMessages() {
+
         // Construct query to execute
         ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
-        // Configure limit and sort order
-        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+        query.whereEqualTo("email", email);
+        query.whereEqualTo("matchEmail", matchEmail);
 
+        ParseQuery<Message> query2 = ParseQuery.getQuery(Message.class);
+        query2.whereEqualTo("email", matchEmail);
+        query2.whereEqualTo("matchEmail", email);
+
+        List<ParseQuery<Message>> queries = new ArrayList<ParseQuery<Message>>();
+        queries.add(query);
+        queries.add(query2);
+
+        ParseQuery<Message> query3 = ParseQuery.or(queries);
+        query3.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
         // get the latest 50 messages, order will show up newest to oldest of this group
-        query.orderByDescending("createdAt");
+        query3.orderByDescending("createdAt");
         // Execute query to fetch all messages from Parse asynchronously
         // This is equivalent to a SELECT query with SQL
-        query.findInBackground(new FindCallback<Message>() {
+        query3.findInBackground(new FindCallback<Message>() {
             public void done(List<Message> messages, ParseException e) {
                 if (e == null) {
+                    Log.v("messages", "length: " + messages.size());
                     mMessages.clear();
                     mMessages.addAll(messages);
                     mAdapter.notifyDataSetChanged(); // update adapter
@@ -114,5 +129,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
